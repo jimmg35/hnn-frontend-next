@@ -1,0 +1,52 @@
+# docker-compose.yml
+version: '3'
+
+volumes:
+  mnet_postgres:
+
+
+networks:
+  mnet_frontend_dev:
+    driver: bridge
+
+services:
+
+  backend:
+    image: mnet-backend-express
+    container_name: mnet-frontend-dev-backend
+    ports:
+      - "${BACKEND_PORT}:8080"
+    entrypoint: [ "/app/entrypoints/entrypoint.sh" ]
+    depends_on:
+      - postgres
+    volumes:
+      - ./static:/app/src/static
+    networks:
+      - mnet_frontend_dev
+
+  postgres:
+    image: postgis/postgis:14-3.3
+    container_name: mnet-frontend-dev-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      APP_DB_USER: ${POSTGRES_USERNAME}
+      APP_DB_PASS: ${POSTGRES_PASSWORD}
+      APP_DB_NAME: ${POSTGRES_DATABASE}
+      PGDATA: /data/postgres
+    volumes:
+      - ./dev-mount:/docker-entrypoint-initdb.d/
+      - mnet_postgres:/data/postgres
+    networks:
+      - mnet_frontend_dev
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: mnet-frontend-dev-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${POSTGRES_USERNAME}@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${PGADMIN4_PORT}:80"
+    networks:
+      - mnet_frontend_dev
