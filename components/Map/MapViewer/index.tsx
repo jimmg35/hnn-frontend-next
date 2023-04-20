@@ -6,9 +6,9 @@ import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer"
 import SimpleRenderer from "@arcgis/core/renderers/SimpleRenderer"
 import SimpleMarkerSymbol from "@arcgis/core/symbols/SimpleMarkerSymbol"
 import SimpleLineSymbol from "@arcgis/core/symbols/SimpleLineSymbol"
-import MapPopup from '../../MapPopup'
-import DefaultTemplate from '../../MapPopup/DefaultTemplate'
 import Point from "@arcgis/core/geometry/Point"
+// import MapPopup from '../../MapPopup'
+// import DefaultTemplate from '../../MapPopup/DefaultTemplate'
 
 const geoJsonLayerRenderer = new SimpleRenderer({
   symbol: new SimpleMarkerSymbol({
@@ -22,7 +22,7 @@ const geoJsonLayerRenderer = new SimpleRenderer({
 })
 
 const mapOptions = {
-  mapOption: { basemap: 'topo-vector' },
+  mapOption: {},
   mapViewOption: {}
 }
 
@@ -91,14 +91,14 @@ const MapViewer = (
   return (
     <>
       <div className={style.MapViewer} ref={mapRef}></div>
-      <MapPopup
+      {/* <MapPopup
         point={popupPoint}
         open={openPopup}
         view={asyncMapView}
         mapRef={mapRef}
       >
         <DefaultTemplate />
-      </MapPopup>
+      </MapPopup> */}
     </>
   )
 }
