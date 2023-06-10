@@ -1,8 +1,12 @@
-import HomeContainer from '@/containers/HomeContainer'
+import QueryContainer from '@/containers/QueryContainer'
 import Image from 'next/image'
 
 export default function Home () {
   return (
-    <HomeContainer />
+    <div>
+
+      <QueryContainer />
+
+    </div>
   )
 }
