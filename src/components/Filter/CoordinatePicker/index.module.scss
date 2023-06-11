@@ -6,7 +6,8 @@
     }
 
     .Detail {
-        @apply flex gap-4;
+        @apply flex gap-4 text-sm font-extrabold;
+        color: #7d888d;
     }
 
     &:hover {

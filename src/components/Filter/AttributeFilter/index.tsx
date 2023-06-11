@@ -11,17 +11,30 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+// import 'react-date-range/dist/styles.css'; // main style file
+// import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRange } from 'react-date-range';
+import './DateRangeCss/styles.css'
+import './DateRangeCss/default.css'
 
 const AttributeFilter = () => {
+
+  const selectionRange = {
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection',
+  }
+
   return (
     <div className={style.AttributeFilter}>
 
       <div className={style.FieldSet}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <MobileDatePicker defaultValue={dayjs('2022-04-17')} />
-          <MobileDatePicker defaultValue={dayjs('2022-04-29')} />
-        </LocalizationProvider>
+        <DateRange
+          moveRangeOnFirstSelection={false}
+          editableDateInputs={true}
+          ranges={[selectionRange]}
+          onChange={() => { }}
+        />
       </div>
 
     </div>

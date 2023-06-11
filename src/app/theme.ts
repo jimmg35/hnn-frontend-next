@@ -24,7 +24,7 @@ const theme = createTheme({
           backgroundColor: '#353738',
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: '#52525b',
+              color: '#849095'
             },
             '&:hover fieldset': {
               borderColor: '#44d62c',
@@ -46,32 +46,6 @@ const theme = createTheme({
         },
       },
     },
-
-    // MuiSelect: {
-    //   styleOverrides: {
-    //     select: {
-    //       '&:focus': {
-    //         backgroundColor: '#353738',
-    //       }
-    //     }
-    //   }
-    // },
-    // MuiOutlinedInput: {
-    //   styleOverrides: {
-    //     root: {
-    //       '& fieldset': {
-    //         borderColor: '#3f3f46',
-    //       },
-    //       '&:hover fieldset': {
-    //         borderColor: '#44d62c',
-    //       },
-    //       '& input': {
-    //         color: '#ffffff',
-    //       },
-    //     },
-
-    //   }
-    // },
 
 
     MuiFormLabel: {

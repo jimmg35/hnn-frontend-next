@@ -21,14 +21,18 @@ const CoordinatePicker = ({
 
       <div className={style.Detail}>
         <div>
-          <Typography>{longitude}°S</Typography>
+          <p>{longitude}°S</p>
         </div>
         <div>
-          <Typography>{latitude}°N</Typography>
+          <p>{latitude}°N</p>
         </div>
       </div>
 
-      <TextField size='small' type='number' minRows={30} maxRows={2000} value={300} />
+      <TextField size='small' type='number' minRows={30}
+        maxRows={2000}
+        value={300}
+        sx={{ bgcolor: '#242627' }}
+      />
     </div>
   )
 }
