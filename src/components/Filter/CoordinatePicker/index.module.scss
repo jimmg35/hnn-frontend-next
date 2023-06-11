@@ -1,3 +1,7 @@
 .CoordinatePicker {
-    @apply w-full h-full bg-red-400;
+    @apply w-full h-full text-white border-zinc-700 border rounded-md bg-main-light cursor-pointer transition p-4;
+
+    &:hover {
+        @apply border-secondary-primary;
+    }
 }

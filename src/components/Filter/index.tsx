@@ -9,7 +9,7 @@ const Filter = () => {
     <div className={style.Filter}>
 
       <div className={style.CoordinatePicker}>
-        <CoordinatePicker />
+        <CoordinatePicker longitude={121} latitude={24} />
       </div>
 
       <Divider />
