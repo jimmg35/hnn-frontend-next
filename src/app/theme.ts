@@ -4,7 +4,7 @@ import { green, purple } from '@mui/material/colors';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#242627',
+      main: '#44d62c',
     },
     secondary: {
       main: '#44d62c',
@@ -46,8 +46,6 @@ const theme = createTheme({
         },
       },
     },
-
-
     MuiFormLabel: {
       styleOverrides: {
         root: {

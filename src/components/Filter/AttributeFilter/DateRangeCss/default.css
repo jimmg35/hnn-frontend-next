@@ -189,6 +189,7 @@
   border-radius: 2px;
   /* background: #3d91ff; */
   background: #44d62c;
+  color: black !important;
 }
 
 .rdrDayToday:not(.rdrDayPassive) .rdrInRange~.rdrDayNumber span:after,
