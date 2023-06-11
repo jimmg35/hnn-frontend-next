@@ -1,7 +1,19 @@
 .CoordinatePicker {
-    @apply w-full h-full text-white border-zinc-700 border rounded-md bg-main-light cursor-pointer transition p-4;
+    @apply justify-between select-none gap-5 flex items-center w-full h-full text-white border-zinc-600 border rounded-md bg-main-light cursor-pointer transition p-4;
+
+    .Icon {
+        @apply transition flex;
+    }
+
+    .Detail {
+        @apply flex gap-4;
+    }
 
     &:hover {
-        @apply border-secondary-primary;
+        @apply border-secondary-primary text-secondary-primary;
+
+        .Icon {
+            @apply text-secondary-primary;
+        }
     }
 }
