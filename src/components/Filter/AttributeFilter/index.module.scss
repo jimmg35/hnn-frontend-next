@@ -1,0 +1,11 @@
+.AttributeFilter {
+    @apply w-full h-full flex flex-col gap-8;
+
+    .FieldSet {
+        @apply w-full flex;
+
+        .DateField {
+            @apply flex justify-between w-full;
+        }
+    }
+}
