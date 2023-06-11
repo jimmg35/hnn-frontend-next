@@ -19,7 +19,7 @@ module.exports = {
           'light': '#323F4B'
         },
         'secondary': {
-          'primary': '#00897B'
+          'primary': '#44d62c'
         }
       }
     },

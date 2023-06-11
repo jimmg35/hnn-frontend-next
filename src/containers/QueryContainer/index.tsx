@@ -2,6 +2,8 @@
 import Filter from '@/components/Filter';
 import style from './index.module.scss'
 import dynamic from 'next/dynamic'
+import { ThemeProvider } from '@mui/material';
+import theme from '@/app/theme';
 
 const MapViewer = dynamic(
   () => import('../../components/Map/MapViewer'),
@@ -10,16 +12,19 @@ const MapViewer = dynamic(
 
 const QueryContainer = () => {
   return (
-    <main className={style.QueryContainer}>
+    <ThemeProvider theme={theme}>
+      <main className={style.QueryContainer}>
 
-      <div className={style.FilterContainer}>
-        <Filter />
-      </div>
+        <div className={style.FilterContainer}>
+          <Filter />
+        </div>
 
-      <div className={style.MapContainer}>
-        <MapViewer />
-      </div>
-    </main>
+        <div className={style.MapContainer}>
+          <MapViewer />
+        </div>
+      </main>
+
+    </ThemeProvider>
   )
 
 }
