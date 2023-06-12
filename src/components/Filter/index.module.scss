@@ -2,14 +2,14 @@
     @apply h-full w-full bg-main-primary border border-zinc-600 rounded-md flex flex-col;
 
     .CoordinatePicker {
-        @apply w-full h-[20%] p-8;
+        @apply w-full h-[25%] p-8;
     }
 
     .AttributeFilter {
-        @apply w-full h-[70%] p-8;
+        @apply w-full h-[60%] p-8;
     }
 
     .Action {
-        @apply w-full h-[10%] px-8 py-4;
+        @apply w-full h-[15%] px-8 py-4;
     }
 }

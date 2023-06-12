@@ -1,5 +1,5 @@
 .rdrCalendarWrapper {
-  @apply rounded-md border-zinc-600 border w-full;
+  @apply rounded-md border-zinc-600 border w-full h-full justify-center;
   color: #000000;
   font-size: 12px;
   background-color: #353738;

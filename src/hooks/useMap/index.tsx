@@ -11,12 +11,13 @@ export type UseMapParams = {
   mapViewOption?: Omit<__esri.MapViewProperties, 'map' | 'container'>
 }
 
+// center: [121.30065554162502, 24.993806460414916],
 const defaultMapViewOption: UseMapParams['mapViewOption'] = {
-  center: [121.464, 25.0138],
-  zoom: 13,
+  center: [121.30065554162502, 24.993806460414916],
+  zoom: 14,
   constraints: {
-    minZoom: 12,
-    maxZoom: 20
+    minZoom: 13,
+    maxZoom: 28
   }
 }
 
