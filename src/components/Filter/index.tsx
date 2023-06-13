@@ -9,17 +9,13 @@ const Filter = () => {
     <div className={style.Filter}>
 
       <div className={style.CoordinatePicker}>
-        <CoordinatePicker longitude={121} latitude={24} />
+        <CoordinatePicker />
       </div>
-
       <Divider />
-
       <div className={style.AttributeFilter}>
         <AttributeFilter />
       </div>
-
       <Divider />
-
       <div className={style.Action}>
         <FilterAction />
       </div>
