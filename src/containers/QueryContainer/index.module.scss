@@ -1,0 +1,25 @@
+.QueryContainer {
+    @apply w-screen bg-main-bold flex items-center justify-center gap-8;
+    height: calc(100vh - 60px);
+
+    .FilterContainer {
+        @apply w-[30vw] h-[80vh];
+
+        @media (max-width: 1100px) {
+            @apply w-[80vw];
+        }
+    }
+
+    .MapContainer {
+        @apply w-[60vw] h-[80vh] relative;
+
+        @media (max-width: 1100px) {
+            @apply w-[80vw];
+        }
+
+    }
+
+    @media (max-width: 1100px) {
+        @apply flex-col py-8;
+    }
+}
