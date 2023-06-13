@@ -22,6 +22,7 @@ const QueryContainer = () => {
         <div className={style.MapContainer}>
           <MapViewer />
         </div>
+
       </main>
 
     </ThemeProvider>
