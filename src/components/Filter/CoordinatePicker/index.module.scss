@@ -17,4 +17,12 @@
             @apply text-secondary-primary;
         }
     }
+
+    &.active {
+        @apply border-secondary-primary text-secondary-primary;
+
+        .Icon {
+            @apply text-secondary-primary;
+        }
+    }
 }
