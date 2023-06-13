@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ci": "docker build . -t hnn-frontend-next"
   },
   "dependencies": {
     "@arcgis/core": "^4.26.5",
