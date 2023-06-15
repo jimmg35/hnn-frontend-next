@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { GetAssetDetailByAprId, ListByExtent } from './types/apr'
+import { GetAssetDetailByAprId, ListByExtent, SpatialQuery } from './types/apr'
 
 export const aprApi = createApi({
   reducerPath: 'aprApi',
@@ -16,11 +16,23 @@ export const aprApi = createApi({
         url: `listByExtent`,
         method: 'get',
       }),
+    }),
+
+    spatialQuery: builder.mutation<
+      SpatialQuery['ResponseType'],
+      SpatialQuery['ParamType']
+    >({
+      query: (param) => ({
+        url: 'query',
+        method: 'post',
+        body: param
+      })
     })
 
   })
 })
 
 export const {
-  useLazyListByExtentQuery
+  useLazyListByExtentQuery,
+  useSpatialQueryMutation
 } = aprApi

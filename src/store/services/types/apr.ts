@@ -42,10 +42,6 @@ export type GetAssetDetailByAprId = {
 
 
 export type ListByExtentParam = {
-  // xmin: number
-  // xmax: number
-  // ymin: number
-  // ymax: number
 }
 
 export type ListByExtentResponse = {
@@ -65,4 +61,24 @@ export type ListByExtentResponse = {
 export type ListByExtent = {
   ParamType: ListByExtentParam
   ResponseType: ListByExtentResponse
+}
+
+
+export type SpatialQueryParam = {
+  geojson: string
+  transactionTimeStart: string
+  transactionTimeEnd: string
+}
+
+export type SpatialQueryResponse = {
+  id: string
+  geometry: {
+    type: string
+    coordinates: number[]
+  }
+}
+
+export type SpatialQuery = {
+  ParamType: SpatialQueryParam
+  ResponseType: SpatialQueryResponse[]
 }

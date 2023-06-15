@@ -1,4 +1,4 @@
-import { Providers } from '@/store/provider'
+import { Persist, Providers } from '@/store/provider'
 import { Inter } from 'next/font/google'
 import NavBar from '@/components/NavBar'
 import store from '../store'
@@ -20,8 +20,10 @@ export default function RootLayout ({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <NavBar />
-          {children}
+          <Persist>
+            <NavBar />
+            {children}
+          </Persist>
         </Providers>
       </body>
     </html>

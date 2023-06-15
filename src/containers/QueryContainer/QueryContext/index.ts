@@ -5,9 +5,18 @@ export interface IQueryContext {
   latitude: number | undefined
   bufferRadius: number
   isPickerActive: boolean
+  geojson: string | undefined
+  dateStart: string
+  dateEnd: string
+  alertOpen: boolean
+  alertMsg: string
+  onAlert: (msg: string, open: boolean) => void
   onPickerClick: () => void
   onMapPick: (longitude: number, latitude: number) => void
   onBufferChange: (value: number) => void
+  onGeojsonChange: (geojson: string) => void
+  onDateRangeChange: (start: string, end: string) => void
+  onQueryClick: () => void
 }
 
 const QueryContext = createContext<IQueryContext>({
@@ -15,9 +24,18 @@ const QueryContext = createContext<IQueryContext>({
   latitude: undefined,
   isPickerActive: false,
   bufferRadius: 300,
+  geojson: undefined,
+  dateStart: '2018-01-01',
+  dateEnd: '2018-01-31',
+  alertOpen: false,
+  alertMsg: '',
+  onAlert: () => { },
   onPickerClick: () => { },
   onMapPick: () => { },
-  onBufferChange: () => { }
+  onBufferChange: () => { },
+  onGeojsonChange: () => { },
+  onDateRangeChange: () => { },
+  onQueryClick: () => { }
 })
 
 export default QueryContext

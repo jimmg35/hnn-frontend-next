@@ -1,28 +1,29 @@
-import { Checkbox, TextField } from '@mui/material'
+
+import { DateRange, RangeKeyDict } from 'react-date-range'
 import style from './index.module.scss'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-// import { MobileDateRangePicker } from '@mui/x-date-pickers-pro/MobileDateRangePicker'
-// import mobiledater
-import dayjs from 'dayjs';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-// import 'react-date-range/dist/styles.css'; // main style file
-// import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRange } from 'react-date-range';
 import './DateRangeCss/styles.css'
 import './DateRangeCss/default.css'
+import QueryContext from '@/containers/QueryContainer/QueryContext'
+import { useContext } from 'react'
+import moment from 'moment'
 
 const AttributeFilter = () => {
+  const {
+    dateStart, dateEnd, onDateRangeChange
+  } = useContext(QueryContext)
 
   const selectionRange = {
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: new Date(dateStart),
+    endDate: new Date(dateEnd),
     key: 'selection',
+  }
+
+  const handleDateChange = (range: RangeKeyDict) => {
+    const start = moment(range.selection.startDate)
+    const end = moment(range.selection.endDate)
+    const startString = start.format('YYYY-MM-DD')
+    const endString = end.format('YYYY-MM-DD')
+    onDateRangeChange(startString, endString)
   }
 
   return (
@@ -33,7 +34,7 @@ const AttributeFilter = () => {
           moveRangeOnFirstSelection={false}
           editableDateInputs={true}
           ranges={[selectionRange]}
-          onChange={() => { }}
+          onChange={handleDateChange}
         />
       </div>
 

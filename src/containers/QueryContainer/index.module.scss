@@ -3,7 +3,7 @@
     height: calc(100vh - 60px);
 
     .FilterContainer {
-        @apply w-[30vw] h-[80vh];
+        @apply w-[30vw] h-[80vh] relative;
 
         @media (max-width: 1100px) {
             @apply w-[80vw];
