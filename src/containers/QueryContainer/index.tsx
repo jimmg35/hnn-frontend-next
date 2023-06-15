@@ -7,9 +7,10 @@ import theme from '@/app/theme'
 import { useSpatialQueryMutation } from '@/store/services/apr'
 import { ThemeProvider } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import QueryAlert from '@/components/QueryAlert'
 import { onResultAprChange } from '@/store/slice/apr'
+import { useRouter } from 'next/navigation'
 
 const MapViewer = dynamic(
   () => import('../../components/Map/MapViewer'),
@@ -24,11 +25,11 @@ const QueryContainer = () => {
   const [isPickerActive, setisPickerActive] = useState<boolean>(false)
   const [dateStart, setdateStart] = useState<string>('2018-01-09')
   const [dateEnd, setdateEnd] = useState<string>('2018-01-17')
-  const [triggerQuery, { isLoading, isSuccess, isError, data
-  }] = useSpatialQueryMutation()
+  const [triggerQuery, { isLoading }] = useSpatialQueryMutation()
   const [alertOpen, setalertOpen] = useState<boolean>(false)
   const [alertMsg, setalertMsg] = useState<string>('')
   const dispatch = useDispatch()
+  const router = useRouter()
 
 
   const handleQueryClick = async () => {
@@ -51,14 +52,14 @@ const QueryContainer = () => {
       return
     }
     dispatch(onResultAprChange(response.data))
-
+    router.push('/result')
   }
 
-  return (
-    <ThemeProvider theme={theme}>
+  const QueryProvider = (children: React.ReactNode) => {
+    return (
       <QueryContext.Provider value={{
         isPickerActive, latitude, longitude, bufferRadius,
-        dateStart, dateEnd, geojson, alertOpen, alertMsg,
+        dateStart, dateEnd, geojson, alertOpen, alertMsg, isQurying: isLoading,
         onPickerClick: () => { setisPickerActive(prev => !prev) },
         onMapPick: (longitude, latitude) => {
           setlongitude(longitude)
@@ -71,6 +72,14 @@ const QueryContainer = () => {
         onQueryClick: handleQueryClick,
         onAlert: (msg, open) => { setalertOpen(open); setalertMsg(msg); }
       }}>
+        {children}
+      </QueryContext.Provider>
+    )
+  }
+
+  return (
+    <ThemeProvider theme={theme}>
+      {QueryProvider(
         <main className={style.QueryContainer}>
           <div className={style.FilterContainer}>
             <QueryAlert />
@@ -80,7 +89,7 @@ const QueryContainer = () => {
             <MapViewer />
           </div>
         </main>
-      </QueryContext.Provider>
+      )}
     </ThemeProvider>
   )
 

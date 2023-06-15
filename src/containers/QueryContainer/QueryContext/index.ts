@@ -10,6 +10,7 @@ export interface IQueryContext {
   dateEnd: string
   alertOpen: boolean
   alertMsg: string
+  isQurying: boolean
   onAlert: (msg: string, open: boolean) => void
   onPickerClick: () => void
   onMapPick: (longitude: number, latitude: number) => void
@@ -29,6 +30,7 @@ const QueryContext = createContext<IQueryContext>({
   dateEnd: '2018-01-31',
   alertOpen: false,
   alertMsg: '',
+  isQurying: false,
   onAlert: () => { },
   onPickerClick: () => { },
   onMapPick: () => { },
