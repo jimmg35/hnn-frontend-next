@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import persistConfig from '../config'
-
-
-export interface ITestConfig {
-  collapseFixed: boolean
-}
+import { ITestConfig } from './interface'
 
 const init = {
   collapseFixed: true

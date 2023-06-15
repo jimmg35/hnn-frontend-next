@@ -72,38 +72,10 @@ export type SpatialQueryParam = {
 
 export type SpatialQueryResponse = {
   id: string
-  transactiontime: string
-  completiontime: string
-  transferfloor: number
-  unitprice: number
-  pricewithoutparking: number
-  roomnumber: number
-  hallnumber: number
-  bathnumber: number
-  buildingtransferarea: number
-  parkingspaceprice: number
-  parkingspacetransferarea: number
-  price: number
-  landamount: number
-  buildingamount: number
-  parkamount: number
-  buildingtype: number
-  floor: number
-  urbanlanduse: number
-  buildingarea: number
-  subbuildingarea: number
-  belconyarea: number
-  landtransferarea: number
-  parkingspacetype: number
-  coordinate: {
+  geometry: {
     type: string
     coordinates: number[]
   }
-  'yhat-hnn': number
-  y_x: number
-  'yhat-mlp': number
-  y_y: number
-  address: string
 }
 
 export type SpatialQuery = {

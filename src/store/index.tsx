@@ -1,11 +1,13 @@
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { aprApi } from './services/apr'
-import testReducer from './slice/sideBar'
+import testReducer from './slice/test'
+import aprReducer from './slice/apr'
 
 
 const combinedReducer = combineReducers({
   test: testReducer,
+  apr: aprReducer,
   [aprApi.reducerPath]: aprApi.reducer
 })
 

@@ -8,6 +8,9 @@ export interface IQueryContext {
   geojson: string | undefined
   dateStart: string
   dateEnd: string
+  alertOpen: boolean
+  alertMsg: string
+  onAlert: (msg: string, open: boolean) => void
   onPickerClick: () => void
   onMapPick: (longitude: number, latitude: number) => void
   onBufferChange: (value: number) => void
@@ -24,6 +27,9 @@ const QueryContext = createContext<IQueryContext>({
   geojson: undefined,
   dateStart: '2018-01-01',
   dateEnd: '2018-01-31',
+  alertOpen: false,
+  alertMsg: '',
+  onAlert: () => { },
   onPickerClick: () => { },
   onMapPick: () => { },
   onBufferChange: () => { },

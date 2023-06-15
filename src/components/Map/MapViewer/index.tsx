@@ -31,24 +31,39 @@ const mapOptions = {
   mapViewOption: {}
 }
 
+const LoadingScreen = () => {
+  return (
+    <div className={style.Loading}>
+      <CircularProgress style={{ width: '100px', height: '100px' }} />
+      <p>Loading map and data...</p>
+    </div>
+  )
+}
+
 const MapViewer = () => {
-  const { isPickerActive, bufferRadius, longitude, latitude,
-    onMapPick, onGeojsonChange } = useContext(QueryContext)
+  const { isPickerActive, bufferRadius,
+    onMapPick, onGeojsonChange, onAlert } = useContext(QueryContext)
   const mapRef = useRef<HTMLDivElement>(null)
   const { asyncMap, asyncMapView } = useMap(mapRef, mapOptions)
-  const [popupPoint, setPopupPoint] = useState<Point>()
-  const [openPopup, setOpenPopup] = useState(false)
+  const [popupPoint] = useState<Point>()
+  const [openPopup] = useState(false)
+  const [isDataLoaded, setisDataLoaded] = useState<boolean>(false)
   const [getByExtent] = useLazyListByExtentQuery()
 
   const loadGeojsonLayer = async () => {
     const map = await asyncMap
     const response = await getByExtent({})
+    if (response.isError) {
+      onAlert('failed to load data, contact developers', true)
+      return
+    }
     const blob = new Blob([JSON.stringify(response.data)], {
       type: "application/json"
     })
     const url = URL.createObjectURL(blob)
     const geojsonLayer = new GeoJSONLayer({ url, renderer: renderer })
     map.add(geojsonLayer)
+    setisDataLoaded(true)
   }
 
   const addPickerGraphic = async (mapPoint: Point) => {
@@ -164,10 +179,9 @@ const MapViewer = () => {
 
   return (
     <>
-      <div className={style.Loading}>
-        <CircularProgress style={{ width: '100px', height: '100px' }} />
-        <p>Loading map and data...</p>
-      </div>
+
+      <LoadingScreen />
+
       <div className={classNames({
         [style.MapViewer]: true,
         [style.active]: isPickerActive
