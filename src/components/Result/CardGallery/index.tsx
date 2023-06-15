@@ -6,6 +6,12 @@ interface ICardGallery {
   slice: SpatialQueryResponse[]
 }
 
+const NoRecord = () => {
+  return (
+    <p>No records to show</p>
+  )
+}
+
 const CardGallery = ({
   slice
 }: ICardGallery) => {
@@ -13,8 +19,9 @@ const CardGallery = ({
   return (
     <div className={style.CardGallery}>
       {
-        slice.map((apr, index) => <Card key={index} />)
+        slice.map((apr, index) => <Card key={index} {...apr} />)
       }
+      {slice.length === 0 && <NoRecord />}
     </div>
   )
 }

@@ -1,4 +1,7 @@
 .CardGallery {
-    @apply w-full h-full flex flex-col gap-8;
+    @apply select-none w-full h-full flex flex-col gap-8 items-center justify-center;
 
+    p {
+        @apply text-white text-lg font-extrabold;
+    }
 }

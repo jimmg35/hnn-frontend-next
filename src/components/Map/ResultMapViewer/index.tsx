@@ -13,7 +13,7 @@ import Collection from "@arcgis/core/core/Collection.js"
 import Graphic from "@arcgis/core/Graphic.js"
 import { useLazyListByExtentQuery } from '@/store/services/apr'
 import { CircularProgress } from '@mui/material'
-import { renderer } from './renderer'
+import { hoveredRenderer, renderer } from './renderer'
 import PictureMarkerSymbol from "@arcgis/core/symbols/PictureMarkerSymbol.js"
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer.js"
 import Circle from "@arcgis/core/geometry/Circle.js"
@@ -21,9 +21,9 @@ import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js"
 import { useSelector } from 'react-redux';
 import { selectApr } from '@/store/slice/apr';
 import { SpatialQueryResponse } from '@/store/services/types/apr';
+import ResultContext from '@/containers/ResultContainer/ResultContext';
 
-const bufferPointId = 'bufferPointLayer'
-const bufferCircleId = 'bufferCircleLayer'
+const hoverPointId = 'hoverPointLayer'
 
 const mapOptions = {
   mapOption: { basemap: 'arcgis-dark-gray' },
@@ -43,6 +43,7 @@ const ResultMapViewer = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const { asyncMap, asyncMapView } = useMap(mapRef, mapOptions)
   const { resultApr } = useSelector(selectApr)
+  const { hoverApr } = useContext(ResultContext)
   const [popupPoint] = useState<Point>()
   const [openPopup] = useState(false)
 
@@ -65,19 +66,42 @@ const ResultMapViewer = () => {
       "features": conver2Geojson(resultApr)
     }
     const map = await asyncMap
-    const view = await asyncMapView
     const blob = new Blob([JSON.stringify(geojson)], {
       type: "application/json"
     })
     const url = URL.createObjectURL(blob)
     const geojsonLayer = new GeoJSONLayer({ url, renderer: renderer })
     map.add(geojsonLayer)
-    view.goTo(geojsonLayer)
+  }
+
+  const handleHoverLayer = async () => {
+    const map = await asyncMap
+    if (!hoverApr) {
+      const layer = map.findLayerById(hoverPointId)
+      map.remove(layer)
+      return
+    }
+    const geojson = {
+      "type": "FeatureCollection",
+      "features": conver2Geojson([hoverApr])
+    }
+    const blob = new Blob([JSON.stringify(geojson)], {
+      type: "application/json"
+    })
+    const url = URL.createObjectURL(blob)
+    const geojsonLayer = new GeoJSONLayer({ url, renderer: hoveredRenderer, id: hoverPointId })
+    map.add(geojsonLayer)
+
   }
 
   useEffect(() => {
     loadGeojsonLayer()
   }, [])
+
+  useEffect(() => {
+    handleHoverLayer()
+  }, [hoverApr])
+
 
   return (
     <>

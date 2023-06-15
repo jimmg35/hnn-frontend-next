@@ -16,3 +16,17 @@ export const simpleMarkerSymbol = new SimpleMarkerSymbol({
 export const renderer = new SimpleRenderer({
   symbol: simpleMarkerSymbol
 })
+
+export const simpleHoveredMarkerSymbol = new SimpleMarkerSymbol({
+  color: new Color([50, 50, 50, 1]),
+  outline: new SimpleLineSymbol({
+    color: new Color([255, 97, 13, 1]),
+    style: "solid",
+    width: 1
+  }),
+  size: 12
+});
+
+export const hoveredRenderer = new SimpleRenderer({
+  symbol: simpleHoveredMarkerSymbol
+})

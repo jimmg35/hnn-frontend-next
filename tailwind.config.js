@@ -20,6 +20,9 @@ module.exports = {
         },
         'secondary': {
           'primary': '#44d62c'
+        },
+        'third': {
+          'primary': '#ff610d'
         }
       }
     },
