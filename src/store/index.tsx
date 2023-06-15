@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { aprApi } from './services/apr'
+import { persistStore, persistReducer } from 'redux-persist'
 
 const combinedReducer = combineReducers({
   [aprApi.reducerPath]: aprApi.reducer

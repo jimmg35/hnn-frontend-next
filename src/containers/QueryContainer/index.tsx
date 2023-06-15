@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material';
 import theme from '@/app/theme';
 import { useContext, useState } from 'react';
 import QueryContext from './QueryContext';
+import { useSpatialQueryMutation } from '@/store/services/apr';
 
 const MapViewer = dynamic(
   () => import('../../components/Map/MapViewer'),
@@ -20,9 +21,14 @@ const QueryContainer = () => {
   const [isPickerActive, setisPickerActive] = useState<boolean>(false)
   const [dateStart, setdateStart] = useState<string>('2018-01-09')
   const [dateEnd, setdateEnd] = useState<string>('2018-01-17')
+  const [triggerQuery, { isLoading, isSuccess, isError, data
+  }] = useSpatialQueryMutation()
 
   const handleQueryClick = async () => {
-
+    if (!geojson) return
+    await triggerQuery({
+      geojson, transactionTimeStart: dateStart, transactionTimeEnd: dateEnd
+    })
   }
 
   return (

@@ -42,10 +42,6 @@ export type GetAssetDetailByAprId = {
 
 
 export type ListByExtentParam = {
-  // xmin: number
-  // xmax: number
-  // ymin: number
-  // ymax: number
 }
 
 export type ListByExtentResponse = {
@@ -65,4 +61,52 @@ export type ListByExtentResponse = {
 export type ListByExtent = {
   ParamType: ListByExtentParam
   ResponseType: ListByExtentResponse
+}
+
+
+export type SpatialQueryParam = {
+  geojson: string
+  transactionTimeStart: string
+  transactionTimeEnd: string
+}
+
+export type SpatialQueryResponse = {
+  id: string
+  transactiontime: string
+  completiontime: string
+  transferfloor: number
+  unitprice: number
+  pricewithoutparking: number
+  roomnumber: number
+  hallnumber: number
+  bathnumber: number
+  buildingtransferarea: number
+  parkingspaceprice: number
+  parkingspacetransferarea: number
+  price: number
+  landamount: number
+  buildingamount: number
+  parkamount: number
+  buildingtype: number
+  floor: number
+  urbanlanduse: number
+  buildingarea: number
+  subbuildingarea: number
+  belconyarea: number
+  landtransferarea: number
+  parkingspacetype: number
+  coordinate: {
+    type: string
+    coordinates: number[]
+  }
+  'yhat-hnn': number
+  y_x: number
+  'yhat-mlp': number
+  y_y: number
+  address: string
+}
+
+export type SpatialQuery = {
+  ParamType: SpatialQueryParam
+  ResponseType: SpatialQueryResponse[]
 }
