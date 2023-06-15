@@ -1,0 +1,11 @@
+.Result {
+    @apply absolute h-full w-full bg-main-primary border border-zinc-600 rounded-md flex flex-col z-0;
+
+    .CardContainer {
+        @apply w-full h-[85%] p-8;
+    }
+
+    .Action {
+        @apply w-full h-[15%] px-8 py-4;
+    }
+}

@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import QueryAlert from '@/components/QueryAlert'
 import { onResultAprChange } from '@/store/slice/apr'
+import Result from '@/components/Result'
 
 const MapViewer = dynamic(
   () => import('../../components/Map/MapViewer'),
@@ -19,11 +20,12 @@ const ResultContainer = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <main className={style.QueryContainer}>
-        <div className={style.FilterContainer}>
+      <main className={style.ResultContainer}>
+        <div className={style.MapContainer}>
           <MapViewer />
         </div>
-        <div className={style.MapContainer}>
+        <div className={style.CardContainer}>
+          <Result />
         </div>
       </main>
     </ThemeProvider>

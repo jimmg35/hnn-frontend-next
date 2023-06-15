@@ -18,7 +18,7 @@ export const aprSlice = createSlice({
   },
 })
 
-export const selectTestConfig = (state: any) => {
+export const selectApr = (state: any) => {
   return state.apr as IAprConfig
 }
 
