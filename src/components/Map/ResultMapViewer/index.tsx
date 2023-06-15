@@ -22,10 +22,6 @@ import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js"
 const bufferPointId = 'bufferPointLayer'
 const bufferCircleId = 'bufferCircleLayer'
 
-const minimizeFloat = (num: number) => {
-  return parseInt((num * 10000).toString()) / 10000
-}
-
 const mapOptions = {
   mapOption: { basemap: 'arcgis-dark-gray' },
   mapViewOption: {}
@@ -40,7 +36,7 @@ const LoadingScreen = () => {
   )
 }
 
-const MapViewer = () => {
+const ResultMapViewer = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const { asyncMap, asyncMapView } = useMap(mapRef, mapOptions)
   const [popupPoint] = useState<Point>()
@@ -64,20 +60,4 @@ const MapViewer = () => {
   )
 }
 
-export default MapViewer
-
-
-      // const layer = new WMSLayer({
-      //   title: 'ndvi2018',
-      //   url: "http://localhost:9032/geoserver/hnn/wms", // 您的WMS服务URL
-      //   sublayers: [
-      //     {
-      //       name: "hnn:ndvi2018" // 图层名称
-      //     }
-      //   ]
-      // });
-      // console.log(layer)
-      // map.add(layer)
-      // view.when(() => {
-      //   view.goTo(layer.fullExtent)
-      // })
+export default ResultMapViewer

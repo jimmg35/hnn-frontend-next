@@ -1,14 +1,20 @@
+import { SpatialQueryResponse } from '@/store/services/types/apr'
 import Card from './Card'
 import style from './index.module.scss'
 
-const CardGallery = () => {
+interface ICardGallery {
+  slice: SpatialQueryResponse[]
+}
+
+const CardGallery = ({
+  slice
+}: ICardGallery) => {
 
   return (
     <div className={style.CardGallery}>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {
+        slice.map((apr) => <Card />)
+      }
     </div>
   )
 }

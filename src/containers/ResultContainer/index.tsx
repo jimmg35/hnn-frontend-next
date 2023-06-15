@@ -12,7 +12,7 @@ import { onResultAprChange } from '@/store/slice/apr'
 import Result from '@/components/Result'
 
 const MapViewer = dynamic(
-  () => import('../../components/Map/MapViewer'),
+  () => import('../../components/Map/ResultMapViewer'),
   { ssr: false }
 )
 

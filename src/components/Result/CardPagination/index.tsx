@@ -3,15 +3,25 @@ import style from './index.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { selectApr } from '@/store/slice/apr'
 
-const CardPagination = () => {
+interface ICardPagination {
+  itemsPerPage: number
+  currentPage: number
+  onChange: (event: React.ChangeEvent<unknown>, page: number) => void
+}
+
+const CardPagination = ({
+  currentPage, itemsPerPage, onChange
+}: ICardPagination) => {
   const { resultApr } = useSelector(selectApr)
   return (
     <div className={style.CardPagination}>
       <Pagination
-        count={Math.ceil(resultApr.length / 4)}
+        count={Math.ceil(resultApr.length / itemsPerPage)}
         color='secondary'
         variant="outlined"
         size='large'
+        defaultPage={currentPage}
+        onChange={onChange}
       />
     </div>
   )
