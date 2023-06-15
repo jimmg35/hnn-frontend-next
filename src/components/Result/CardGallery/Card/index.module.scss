@@ -8,4 +8,8 @@
     &.active {
         @apply border border-third-primary;
     }
+
+    .Loading {
+        @apply w-full h-full flex items-center justify-center;
+    }
 }
