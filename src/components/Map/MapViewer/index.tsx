@@ -32,7 +32,8 @@ const mapOptions = {
 }
 
 const MapViewer = () => {
-  const { isPickerActive, bufferRadius, onMapPick } = useContext(QueryContext)
+  const { isPickerActive, bufferRadius, longitude, latitude,
+    onMapPick, onGeojsonChange } = useContext(QueryContext)
   const mapRef = useRef<HTMLDivElement>(null)
   const { asyncMap, asyncMapView } = useMap(mapRef, mapOptions)
   const [popupPoint, setPopupPoint] = useState<Point>()
@@ -53,6 +54,10 @@ const MapViewer = () => {
   const addPickerGraphic = async (mapPoint: Point) => {
     if (!isPickerActive) return
     const map = await asyncMap
+    const pointLayerDelete = map.findLayerById(bufferPointId)
+    const circleLayerDelete = map.findLayerById(bufferCircleId)
+    map.removeMany([pointLayerDelete, circleLayerDelete])
+
     const pointGraphic = new Graphic({
       geometry: mapPoint,
       symbol: new PictureMarkerSymbol({
@@ -62,7 +67,6 @@ const MapViewer = () => {
         yoffset: 10
       })
     })
-
     const bufferGraphic = new Graphic({
       geometry: new Circle({
         center: [mapPoint.longitude, mapPoint.latitude] as any,
@@ -77,7 +81,6 @@ const MapViewer = () => {
         color: [255, 116, 0, 0.11]
       })
     })
-
     const pointLayer = new GraphicsLayer({
       id: bufferPointId,
       graphics: [pointGraphic]
@@ -86,12 +89,14 @@ const MapViewer = () => {
       id: bufferCircleId,
       graphics: [bufferGraphic]
     })
-
     map.add(circleLayer)
     map.add(pointLayer)
-
-
-
+    const circleJson = bufferGraphic.toJSON()
+    const geojson = JSON.stringify({
+      "type": "Polygon",
+      "coordinates": circleJson.geometry.rings
+    })
+    return geojson
   }
 
   const handleMapClick = async (event: __esri.ViewClickEvent) => {
@@ -99,8 +104,45 @@ const MapViewer = () => {
     const view = await asyncMapView
     const { mapPoint } = event
     const { longitude, latitude } = view.toMap({ x: mapPoint.longitude, y: mapPoint.latitude })
-    await addPickerGraphic(mapPoint)
+    const geojson = await addPickerGraphic(mapPoint)
     onMapPick(minimizeFloat(longitude), minimizeFloat(latitude))
+    if (geojson) onGeojsonChange(geojson)
+  }
+
+  const handleBufferRadiusChange = async () => {
+    const map = await asyncMap
+    const circleLayer = map.findLayerById(bufferCircleId)
+    if (!circleLayer) return
+    // @ts-ignore
+    const lat = circleLayer.graphics.items[0].geometry.center.latitude
+    // @ts-ignore
+    const lon = circleLayer.graphics.items[0].geometry.center.longitude
+    map.removeMany([circleLayer])
+    const bufferGraphic = new Graphic({
+      geometry: new Circle({
+        center: [lon, lat] as any,
+        // geodesic: true,
+        numberOfPoints: 100,
+        radius: bufferRadius,
+        radiusUnit: 'meters'
+      }),
+      symbol: new SimpleFillSymbol({
+        style: "solid",
+        outline: { width: 1.5, color: [255, 97, 13, 1] },
+        color: [255, 116, 0, 0.11]
+      })
+    })
+    const newCircleLayer = new GraphicsLayer({
+      id: bufferCircleId,
+      graphics: [bufferGraphic]
+    })
+    map.add(newCircleLayer)
+    const circleJson = bufferGraphic.toJSON()
+    const geojson = JSON.stringify({
+      "type": "Polygon",
+      "coordinates": circleJson.geometry.rings
+    })
+    if (geojson) onGeojsonChange(geojson)
   }
 
   const loadClickListener = async () => {
@@ -115,6 +157,10 @@ const MapViewer = () => {
   useEffect(() => {
     loadClickListener()
   }, [isPickerActive])
+
+  useEffect(() => {
+    handleBufferRadiusChange()
+  }, [bufferRadius])
 
   return (
     <>
