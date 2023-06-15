@@ -24,6 +24,7 @@ import { SpatialQueryResponse } from '@/store/services/types/apr';
 import ResultContext from '@/containers/ResultContainer/ResultContext';
 
 const hoverPointId = 'hoverPointLayer'
+const selectedPointId = 'selectedPointLayer'
 
 const mapOptions = {
   mapOption: { basemap: 'arcgis-dark-gray' },
@@ -43,7 +44,7 @@ const ResultMapViewer = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const { asyncMap, asyncMapView } = useMap(mapRef, mapOptions)
   const { resultApr } = useSelector(selectApr)
-  const { hoverApr } = useContext(ResultContext)
+  const { hoverApr, selectedApr } = useContext(ResultContext)
   const [popupPoint] = useState<Point>()
   const [openPopup] = useState(false)
 
@@ -91,8 +92,25 @@ const ResultMapViewer = () => {
     const url = URL.createObjectURL(blob)
     const geojsonLayer = new GeoJSONLayer({ url, renderer: hoveredRenderer, id: hoverPointId })
     map.add(geojsonLayer)
-
   }
+
+
+  const handleSelectedLayer = async () => {
+    const map = await asyncMap
+    const layer = map.findLayerById(selectedPointId)
+    map.remove(layer)
+    const geojson = {
+      "type": "FeatureCollection",
+      "features": conver2Geojson(selectedApr)
+    }
+    const blob = new Blob([JSON.stringify(geojson)], {
+      type: "application/json"
+    })
+    const url = URL.createObjectURL(blob)
+    const geojsonLayer = new GeoJSONLayer({ url, renderer: hoveredRenderer, id: selectedPointId })
+    map.add(geojsonLayer)
+  }
+
 
   useEffect(() => {
     loadGeojsonLayer()
@@ -101,6 +119,10 @@ const ResultMapViewer = () => {
   useEffect(() => {
     handleHoverLayer()
   }, [hoverApr])
+
+  useEffect(() => {
+    handleSelectedLayer()
+  }, [selectedApr])
 
 
   return (

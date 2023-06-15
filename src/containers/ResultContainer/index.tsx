@@ -27,7 +27,12 @@ const ResultContainer = () => {
   }
 
   const handleSelect = (apr: SpatialQueryResponse) => {
-
+    const isAlreadyInside = selectedApr.some((item) => item.id === apr.id)
+    if (isAlreadyInside) {
+      setselectedApr((prevSelectedApr) => prevSelectedApr.filter((item) => item.id !== apr.id))
+    } else {
+      setselectedApr([...selectedApr, apr])
+    }
   }
 
   const ResultProvider = (children: React.ReactNode) => {

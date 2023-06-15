@@ -4,4 +4,8 @@
     &:hover {
         @apply border border-third-primary;
     }
+
+    &.active {
+        @apply border border-third-primary;
+    }
 }
