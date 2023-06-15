@@ -1,4 +1,7 @@
 .Card {
-    @apply w-full h-[160px] bg-black;
+    @apply w-full h-[160px] rounded-md bg-main-bold border border-main-bold transition;
 
+    &:hover {
+        @apply border border-secondary-primary;
+    }
 }

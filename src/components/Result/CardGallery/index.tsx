@@ -13,7 +13,7 @@ const CardGallery = ({
   return (
     <div className={style.CardGallery}>
       {
-        slice.map((apr) => <Card />)
+        slice.map((apr, index) => <Card key={index} />)
       }
     </div>
   )

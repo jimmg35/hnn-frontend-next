@@ -18,6 +18,9 @@ import PictureMarkerSymbol from "@arcgis/core/symbols/PictureMarkerSymbol.js"
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer.js"
 import Circle from "@arcgis/core/geometry/Circle.js"
 import SimpleFillSymbol from "@arcgis/core/symbols/SimpleFillSymbol.js"
+import { useSelector } from 'react-redux';
+import { selectApr } from '@/store/slice/apr';
+import { SpatialQueryResponse } from '@/store/services/types/apr';
 
 const bufferPointId = 'bufferPointLayer'
 const bufferCircleId = 'bufferCircleLayer'
@@ -39,8 +42,42 @@ const LoadingScreen = () => {
 const ResultMapViewer = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const { asyncMap, asyncMapView } = useMap(mapRef, mapOptions)
+  const { resultApr } = useSelector(selectApr)
   const [popupPoint] = useState<Point>()
   const [openPopup] = useState(false)
+
+  const conver2Geojson = (data: SpatialQueryResponse[]) => {
+    return data.map((item) => ({
+      type: 'Feature',
+      geometry: {
+        type: item.geometry.type,
+        coordinates: item.geometry.coordinates,
+      },
+      properties: {
+        id: item.id
+      }
+    }))
+  }
+
+  const loadGeojsonLayer = async () => {
+    const geojson = {
+      "type": "FeatureCollection",
+      "features": conver2Geojson(resultApr)
+    }
+    const map = await asyncMap
+    const view = await asyncMapView
+    const blob = new Blob([JSON.stringify(geojson)], {
+      type: "application/json"
+    })
+    const url = URL.createObjectURL(blob)
+    const geojsonLayer = new GeoJSONLayer({ url, renderer: renderer })
+    map.add(geojsonLayer)
+    view.goTo(geojsonLayer)
+  }
+
+  useEffect(() => {
+    loadGeojsonLayer()
+  }, [])
 
   return (
     <>
