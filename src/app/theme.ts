@@ -8,7 +8,10 @@ const theme = createTheme({
     },
     secondary: {
       main: '#44d62c',
-    }
+    },
+    info: {
+      main: '#ffffff',
+    },
   },
   components: {
     MuiDivider: {

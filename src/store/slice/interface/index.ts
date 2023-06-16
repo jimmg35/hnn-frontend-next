@@ -1,8 +1,9 @@
-import { SpatialQuery } from "@/store/services/types/apr"
+import { GetByIdQuery, SpatialQuery } from "@/store/services/types/apr"
 
 
 export interface IAprConfig {
   resultApr: SpatialQuery['ResponseType']
+  predictApr: GetByIdQuery['ResponseType'][]
 }
 
 export interface ITestConfig {

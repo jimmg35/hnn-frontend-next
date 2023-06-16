@@ -19,7 +19,7 @@ const CardPagination = ({
         count={Math.ceil(resultApr.length / itemsPerPage)}
         color='secondary'
         variant="outlined"
-        size='large'
+        size='small'
         defaultPage={currentPage}
         onChange={onChange}
       />

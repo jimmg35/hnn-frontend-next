@@ -22,9 +22,10 @@ export const simpleHoveredMarkerSymbol = new SimpleMarkerSymbol({
   outline: new SimpleLineSymbol({
     color: new Color([255, 97, 13, 1]),
     style: "solid",
-    width: 1
+    width: 2
   }),
-  size: 12
+  size: 12,
+  style: 'x'
 });
 
 export const hoveredRenderer = new SimpleRenderer({

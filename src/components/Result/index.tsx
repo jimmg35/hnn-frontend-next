@@ -1,18 +1,23 @@
-import { Divider } from '@mui/material'
+import { Divider, Button } from '@mui/material'
 import style from './index.module.scss'
 import FilterAction from '../Filter/FilterAction'
 import CardGallery from './CardGallery'
 import CardPagination from './CardPagination'
 import { useSelector } from 'react-redux'
 import { selectApr } from '@/store/slice/apr'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { SpatialQueryResponse } from '@/store/services/types/apr'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
+import classNames from 'classnames'
+import ResultContext from '@/containers/ResultContainer/ResultContext'
 
 const Result = () => {
   const { resultApr } = useSelector(selectApr)
   const [itemsPerPage, setitemsPerPage] = useState<number>(4)
   const [currentPage, setcurrentPage] = useState<number>(1)
   const [aprSlice, setaprSlice] = useState<SpatialQueryResponse[]>([])
+  const { selectedApr } = useContext(ResultContext)
+  const isActive = selectedApr.length !== 0
 
   const sliceAprArray = (page: number) => {
     const startIndex = (page - 1) * itemsPerPage
@@ -34,6 +39,18 @@ const Result = () => {
   return (
     <div className={style.Result}>
 
+      <div className={classNames({
+        [style.Title]: true,
+        [style.active]: isActive,
+      })}>
+        <p>Select targets to predict</p>
+        {isActive && <Button
+          variant='outlined'
+          color='info'
+          startIcon={<AnalyticsIcon />}
+        >Predict</Button>}
+      </div>
+      <Divider />
       <div className={style.CardContainer}>
         <CardGallery slice={aprSlice} />
       </div>

@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import persistConfig from '../config'
 import { IAprConfig } from './interface'
-import { SpatialQuery } from '../services/types/apr'
+import { GetByIdQuery, SpatialQuery } from '../services/types/apr'
 
 const init = {
-  resultApr: []
+  resultApr: [],
+  predictApr: []
 } as IAprConfig
 
 export const aprSlice = createSlice({
@@ -14,6 +15,9 @@ export const aprSlice = createSlice({
   reducers: {
     onResultAprChange: (state: IAprConfig, action: { type: string; payload: SpatialQuery['ResponseType'] }) => {
       state.resultApr = action.payload
+    },
+    onPredictAprChange: (state: IAprConfig, action: { type: string; payload: GetByIdQuery['ResponseType'][] }) => {
+      state.predictApr = action.payload
     }
   },
 })
@@ -24,6 +28,7 @@ export const selectApr = (state: any) => {
 
 export const {
   onResultAprChange,
+  onPredictAprChange
 } = aprSlice.actions
 
 const aprReducer = persistReducer<IAprConfig>(persistConfig, aprSlice.reducer)
