@@ -3,15 +3,18 @@ import style from './index.module.scss'
 import FilterAction from '../Filter/FilterAction'
 import CardGallery from './CardGallery'
 import CardPagination from './CardPagination'
-import { useSelector } from 'react-redux'
-import { selectApr } from '@/store/slice/apr'
+import { useDispatch, useSelector } from 'react-redux'
+import { onPredictAprChange, selectApr } from '@/store/slice/apr'
 import { useContext, useEffect, useState } from 'react'
 import { SpatialQueryResponse } from '@/store/services/types/apr'
 import AnalyticsIcon from '@mui/icons-material/Analytics'
 import classNames from 'classnames'
 import ResultContext from '@/containers/ResultContainer/ResultContext'
+import { useRouter } from 'next/navigation'
 
 const Result = () => {
+  const router = useRouter()
+  const dispatch = useDispatch()
   const { resultApr } = useSelector(selectApr)
   const [itemsPerPage, setitemsPerPage] = useState<number>(4)
   const [currentPage, setcurrentPage] = useState<number>(1)
@@ -31,6 +34,11 @@ const Result = () => {
     setaprSlice(slice)
   }
 
+  const handlePredict = () => {
+    dispatch(onPredictAprChange(selectedApr))
+    router.push('/predict')
+  }
+
   useEffect(() => {
     const slice = sliceAprArray(currentPage)
     setaprSlice(slice)
@@ -48,6 +56,7 @@ const Result = () => {
           variant='outlined'
           color='info'
           startIcon={<AnalyticsIcon />}
+          onClick={handlePredict}
         >Predict</Button>}
       </div>
       <Divider />

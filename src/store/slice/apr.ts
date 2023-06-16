@@ -16,7 +16,7 @@ export const aprSlice = createSlice({
     onResultAprChange: (state: IAprConfig, action: { type: string; payload: SpatialQuery['ResponseType'] }) => {
       state.resultApr = action.payload
     },
-    onPredictAprChange: (state: IAprConfig, action: { type: string; payload: GetByIdQuery['ResponseType'][] }) => {
+    onPredictAprChange: (state: IAprConfig, action: { type: string; payload: SpatialQuery['ResponseType'] }) => {
       state.predictApr = action.payload
     }
   },

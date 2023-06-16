@@ -21,7 +21,7 @@ const ShortenUnitPrice = (value: number) => {
 }
 
 const Card = (apr: SpatialQueryResponse) => {
-  const { data, isSuccess, isLoading } = useGetByIdQuery({ id: apr.id })
+  const { data } = useGetByIdQuery({ id: apr.id })
   const { selectedApr, onHover, onSelect } = useContext(ResultContext)
   const isSelected = selectedApr.some((item) => item.id === apr.id)
 
