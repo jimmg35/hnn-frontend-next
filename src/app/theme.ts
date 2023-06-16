@@ -41,7 +41,7 @@ const theme = createTheme({
         root: {
           color: '#ffffff',
           '&.Mui-checked': {
-            color: '#44d62c',
+            color: '#ff610d',
           },
         },
       },
