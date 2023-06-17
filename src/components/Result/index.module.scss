@@ -11,6 +11,16 @@
         &.active {
             @apply bg-third-primary;
         }
+
+        .Text {
+            flex: 0.7;
+        }
+
+        .Action {
+            @apply flex items-center justify-center;
+
+            flex: 0.3;
+        }
     }
 
     .CardContainer {
