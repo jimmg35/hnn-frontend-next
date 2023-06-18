@@ -1,0 +1,82 @@
+.Card {
+    @apply text-white relative shadow-sm cursor-pointer w-full h-[160px] rounded-md bg-main-bold border border-main-bold transition;
+
+    &:hover {
+        @apply border border-third-primary;
+    }
+
+    &.active {
+        @apply border border-third-primary;
+    }
+
+    .Loading {
+        @apply w-full h-full flex items-center justify-center absolute;
+    }
+
+    .Info {
+        @apply absolute w-full h-full flex items-center justify-center;
+
+        .Check {
+            // @apply;
+            flex: 0.1;
+        }
+
+        .Desc {
+            @apply justify-between border-l border-main-light h-full p-2 flex flex-col items-start;
+            flex: 0.7;
+
+            .Id {
+                @apply text-xs font-extralight text-opacity-60;
+            }
+
+            .Address {
+                @apply text-sm;
+            }
+
+            .Content {
+                @apply flex w-full;
+
+                .Piped {
+                    @apply flex gap-2;
+                    flex: 0.5;
+
+                    .PipedCell {
+                        @apply flex items-center gap-1;
+
+                        p {
+                            @apply text-xs;
+                        }
+                    }
+                }
+
+                .Area {
+                    @apply flex flex-col;
+                    flex: 0.5;
+
+                    p {
+                        @apply text-sm font-extralight text-white text-opacity-50;
+                    }
+
+                    .AreaCell {
+                        @apply w-full flex items-center gap-1;
+                    }
+                }
+            }
+
+        }
+
+        .Price {
+            @apply border-l border-main-light p-2 text-red-400 font-bold text-2xl flex h-full items-center justify-center;
+            flex: 0.2;
+
+            .priceContainer {
+                @apply flex items-end;
+
+                .unit {
+                    @apply text-base text-red-400;
+                }
+            }
+        }
+
+    }
+}

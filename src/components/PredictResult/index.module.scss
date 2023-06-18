@@ -1,0 +1,33 @@
+.Result {
+    @apply absolute h-full w-full bg-main-primary border border-zinc-600 rounded-md flex flex-col z-0;
+
+    .Title {
+        @apply w-full h-[10%] px-8 py-2 flex items-center justify-between;
+
+        p {
+            @apply text-xl text-white font-extrabold;
+        }
+
+        &.active {
+            @apply bg-third-primary;
+        }
+
+        .Text {
+            flex: 0.7;
+        }
+
+        .Action {
+            @apply flex items-center justify-center;
+
+            flex: 0.3;
+        }
+    }
+
+    .CardContainer {
+        @apply w-full h-[80%] p-8;
+    }
+
+    .Action {
+        @apply w-full h-[10%] px-8;
+    }
+}

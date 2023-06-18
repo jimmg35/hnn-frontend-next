@@ -27,17 +27,7 @@ const Result = () => {
     const startIndex = (page - 1) * itemsPerPage
     const currentPageItems = resultApr.slice(startIndex, startIndex + itemsPerPage)
     return currentPageItems
-  }
-
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    const slice = sliceAprArray(page)
-    setcurrentPage(page)
-    setaprSlice(slice)
-  }
-
-  const handlePredict = () => {
-    setisPredictClicked(true)
-  }
+  }\
 
   useEffect(() => {
     const slice = sliceAprArray(currentPage)
@@ -52,20 +42,8 @@ const Result = () => {
         [style.active]: isActive,
       })}>
         <div className={style.Text}>
-          <p>{'Select targets to predict'}</p>
+          <p>{'Predictions of neural networks'}</p>
         </div>
-        {isActive && <div className={style.Action}>
-          {
-            isPredictClicked
-              ? <CircularStatic />
-              : <Button
-                variant='outlined'
-                color='info'
-                startIcon={<AnalyticsIcon />}
-                onClick={handlePredict}
-              >Predict</Button>
-          }
-        </div>}
       </div>
       <Divider />
 

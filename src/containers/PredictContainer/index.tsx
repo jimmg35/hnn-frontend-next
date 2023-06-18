@@ -10,6 +10,8 @@ import React, { useState } from 'react'
 import QueryAlert from '@/components/QueryAlert'
 import { onResultAprChange } from '@/store/slice/apr'
 import { useRouter } from 'next/navigation'
+import Result from '@/components/Result'
+import PredictContext from './PredictContext'
 
 const MapViewer = dynamic(
   () => import('../../components/Map/MapViewer'),
@@ -18,17 +20,25 @@ const MapViewer = dynamic(
 
 const PredictContainer = () => {
 
+  const PredictProvider = (children: React.ReactNode) => {
+    return (
+      <PredictContext.Provider value={{
+      }}>
+        {children}
+      </PredictContext.Provider>
+    )
+  }
+
   return (
     <ThemeProvider theme={theme}>
-      <main className={style.PredictContainer}>
+      {PredictProvider(<main className={style.PredictContainer}>
         <div className={style.FilterContainer}>
-          {/* <QueryAlert />
-          <Filter /> */}
+          <Result />
         </div>
         <div className={style.MapContainer}>
-          {/* <MapViewer /> */}
+          <MapViewer />
         </div>
-      </main>
+      </main>)}
     </ThemeProvider>
   )
 
