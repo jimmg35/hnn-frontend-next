@@ -2,7 +2,7 @@
     @apply text-white relative shadow-sm cursor-pointer w-full h-[160px] rounded-md bg-main-bold border border-main-bold transition;
 
     &:hover {
-        @apply border border-third-primary;
+        @apply border border-secondary-primary;
     }
 
     &.active {
@@ -16,14 +16,10 @@
     .Info {
         @apply absolute w-full h-full flex items-center justify-center;
 
-        .Check {
-            // @apply;
-            flex: 0.1;
-        }
 
         .Desc {
             @apply justify-between border-l border-main-light h-full p-2 flex flex-col items-start;
-            flex: 0.7;
+            flex: 0.8;
 
             .Id {
                 @apply text-xs font-extralight text-opacity-60;

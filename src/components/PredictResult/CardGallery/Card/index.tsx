@@ -27,19 +27,14 @@ const Card = (apr: SpatialQueryResponse) => {
 
   return (
     <div className={classNames({
-      [style.Card]: true,
-      [style.active]: isSelected
+      [style.Card]: true
     })}
       onMouseEnter={() => { onHover(apr) }}
       onMouseLeave={() => { onHover(undefined) }}
-      onClick={() => { onSelect(apr) }}
     >
       {
         data ?
           <div className={style.Info}>
-            <div className={style.Check}>
-              <Checkbox checked={isSelected} />
-            </div>
 
             <div className={style.Desc}>
               <p className={style.Id}>{apr.id}</p>

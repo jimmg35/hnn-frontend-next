@@ -12,6 +12,7 @@ import { onResultAprChange } from '@/store/slice/apr'
 import { useRouter } from 'next/navigation'
 import Result from '@/components/Result'
 import PredictContext from './PredictContext'
+import PredictResult from '@/components/PredictResult'
 
 const MapViewer = dynamic(
   () => import('../../components/Map/MapViewer'),
@@ -33,7 +34,7 @@ const PredictContainer = () => {
     <ThemeProvider theme={theme}>
       {PredictProvider(<main className={style.PredictContainer}>
         <div className={style.FilterContainer}>
-          <Result />
+          <PredictResult />
         </div>
         <div className={style.MapContainer}>
           <MapViewer />

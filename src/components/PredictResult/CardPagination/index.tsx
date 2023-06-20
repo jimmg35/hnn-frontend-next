@@ -12,11 +12,11 @@ interface ICardPagination {
 const CardPagination = ({
   currentPage, itemsPerPage, onChange
 }: ICardPagination) => {
-  const { resultApr } = useSelector(selectApr)
+  const { predictApr } = useSelector(selectApr)
   return (
     <div className={style.CardPagination}>
       <Pagination
-        count={Math.ceil(resultApr.length / itemsPerPage)}
+        count={Math.ceil(predictApr.length / itemsPerPage)}
         color='secondary'
         variant="outlined"
         size='small'

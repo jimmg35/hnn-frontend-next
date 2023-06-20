@@ -14,20 +14,24 @@ import ResultContext from '@/containers/ResultContainer/ResultContext'
 import LoadingButton from '@mui/lab/LoadingButton'
 import CircularStatic from '../CircularStatic'
 
-const Result = () => {
-  const { resultApr } = useSelector(selectApr)
-  const { selectedApr } = useContext(ResultContext)
+const PredictResult = () => {
+  const { predictApr } = useSelector(selectApr)
   const [itemsPerPage] = useState<number>(4)
   const [currentPage, setcurrentPage] = useState<number>(1)
   const [aprSlice, setaprSlice] = useState<SpatialQueryResponse[]>([])
   const [isPredictClicked, setisPredictClicked] = useState<boolean>(false)
-  const isActive = selectedApr.length !== 0
 
   const sliceAprArray = (page: number) => {
     const startIndex = (page - 1) * itemsPerPage
-    const currentPageItems = resultApr.slice(startIndex, startIndex + itemsPerPage)
+    const currentPageItems = predictApr.slice(startIndex, startIndex + itemsPerPage)
     return currentPageItems
-  }\
+  }
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    const slice = sliceAprArray(page)
+    setcurrentPage(page)
+    setaprSlice(slice)
+  }
 
   useEffect(() => {
     const slice = sliceAprArray(currentPage)
@@ -38,11 +42,10 @@ const Result = () => {
     <div className={style.Result}>
 
       <div className={classNames({
-        [style.Title]: true,
-        [style.active]: isActive,
+        [style.Title]: true
       })}>
         <div className={style.Text}>
-          <p>{'Predictions of neural networks'}</p>
+          <p>{'Prediction results'}</p>
         </div>
       </div>
       <Divider />
@@ -64,4 +67,4 @@ const Result = () => {
   )
 }
 
-export default Result
+export default PredictResult
