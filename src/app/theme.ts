@@ -8,7 +8,10 @@ const theme = createTheme({
     },
     secondary: {
       main: '#44d62c',
-    }
+    },
+    info: {
+      main: '#ffffff',
+    },
   },
   components: {
     MuiDivider: {
@@ -41,7 +44,7 @@ const theme = createTheme({
         root: {
           color: '#ffffff',
           '&.Mui-checked': {
-            color: '#44d62c',
+            color: '#ff610d',
           },
         },
       },
@@ -53,7 +56,23 @@ const theme = createTheme({
         },
       },
     },
-
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          '&.Mui-disabled': {
+            color: 'rgba(255, 97, 13, 0.6)',
+            border: '1px solid rgba(255, 97, 13, 0.3)',
+          },
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: 'white'
+        },
+      },
+    },
 
   },
 });

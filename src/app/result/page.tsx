@@ -1,13 +1,9 @@
-import QueryContainer from '@/containers/QueryContainer'
-import Image from 'next/image'
+import ResultContainer from '@/containers/ResultContainer'
 
 export default function Result () {
   return (
     <div>
-
-      {/* <QueryContainer /> */}
-      <p>555</p>
-
+      <ResultContainer />
     </div>
   )
 }

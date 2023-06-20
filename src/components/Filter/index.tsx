@@ -1,4 +1,4 @@
-import { Button, Divider } from '@mui/material'
+import { Divider } from '@mui/material'
 import style from './index.module.scss'
 import AttributeFilter from './AttributeFilter'
 import CoordinatePicker from './CoordinatePicker'
