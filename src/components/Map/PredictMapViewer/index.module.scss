@@ -1,0 +1,15 @@
+.PredictMapViewer {
+    @apply w-full h-[80%] rounded-md border border-zinc-600;
+
+    &.active {
+        @apply cursor-crosshair border border-secondary-primary;
+    }
+}
+
+.Loading {
+    @apply w-full h-[80%] rounded-md border border-zinc-600 absolute flex flex-col gap-8 items-center justify-center;
+
+    p {
+        @apply text-2xl text-white font-extrabold;
+    }
+}
